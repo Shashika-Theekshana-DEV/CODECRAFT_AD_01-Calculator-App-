@@ -15,3 +15,4 @@ struct CODECRAFT_AD_01__Calculator_App__App: App {
         }
     }
 }
+
