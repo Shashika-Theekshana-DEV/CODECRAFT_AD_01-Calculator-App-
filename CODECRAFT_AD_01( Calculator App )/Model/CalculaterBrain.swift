@@ -12,7 +12,7 @@ enum Operation {
     case add, subtract, multiply, divide, none
 }
 
-struct CalculatorModel {
+struct CalculaterBrain {
     private var currentNumber: Double = 0
     private var previousNumber: Double = 0
     private var operation: Operation = .none

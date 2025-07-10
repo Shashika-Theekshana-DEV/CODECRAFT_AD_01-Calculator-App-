@@ -10,10 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         
-        MainCalculatorView()
+       MainCalculatorView()
     }
 }
 
-#Preview {
-    ContentView()
-}
