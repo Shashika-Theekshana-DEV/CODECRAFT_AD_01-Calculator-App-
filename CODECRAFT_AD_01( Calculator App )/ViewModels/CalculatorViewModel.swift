@@ -1,6 +1,6 @@
 //
 //  CalculatorViewModel.swift
-//  CODECRAFT_AD_01( Calculator App )
+//  CODECRAFT_AD_01(Calculator App)
 //
 //  Created by shashika theekshana on BE 2568-07-09.
 //
@@ -9,6 +9,7 @@ import Foundation
 
 class CalculatorViewModel: ObservableObject {
     @Published var displayText: String = "0"
+    @Published var operationText: String = ""
     
     private var model = CalculaterBrain()
     private var isUserTyping = false
@@ -38,19 +39,40 @@ class CalculatorViewModel: ObservableObject {
             displayText = digit == "." ? "0." : digit
             isUserTyping = true
         }
+        operationText = ""
     }
     
     func operationPressed(_ operation: Operation) {
+        if operationText.isEmpty && displayValue == 0 {
+            return
+        }
+        
         if isUserTyping {
             model.setOperand(displayValue)
             isUserTyping = false
         }
+        
+        switch operation {
+        case .add: operationText = "+"
+        case .subtract: operationText = "-"
+        case .multiply: operationText = "×"
+        case .divide:
+            if displayValue == 0 {
+                displayText = "Error"
+                operationText = ""
+                return
+            }
+            operationText = "÷"
+        case .none: operationText = ""
+        }
+        
         if let result = model.performOperation(operation) {
             displayValue = result
         }
     }
     
     func calculate() {
+        operationText = ""
         if isUserTyping {
             model.setOperand(displayValue)
             isUserTyping = false
@@ -61,6 +83,7 @@ class CalculatorViewModel: ObservableObject {
     func reset() {
         model.reset()
         displayText = "0"
+        operationText = ""
         isUserTyping = false
     }
 }

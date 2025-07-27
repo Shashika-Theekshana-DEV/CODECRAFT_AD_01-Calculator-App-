@@ -1,10 +1,9 @@
 //
 //  MainCalculatorView.swift
-//  CODECRAFT_AD_01( Calculator App )
+//  CODECRAFT_AD_01(Calculator App)
 //
 //  Created by shashika theekshana on BE 2568-07-09.
 //
-
 
 import SwiftUI
 
@@ -24,16 +23,21 @@ struct MainCalculatorView: View {
             Color.black.edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 12) {
-            
                 HStack {
                     Spacer()
-                    Text(viewModel.displayText)
-                        .foregroundColor(.white)
-                        .font(.system(size: 64))
-                        .padding()
+                    VStack(alignment: .trailing, spacing: 8) {
+                        Text(viewModel.operationText)
+                            .foregroundColor(.white)
+                            .font(.system(size: 32))
+                            .frame(height: 30)
+                        
+                        Text(viewModel.displayText)
+                            .foregroundColor(.white)
+                            .font(.system(size: 64))
+                    }
+                    .padding()
                 }
                 .padding(.horizontal)
-                
                 
                 ForEach(buttons, id: \.self) { row in
                     HStack(spacing: 12) {
@@ -116,5 +120,3 @@ struct CalculatorButtonView: View {
         return (UIScreen.main.bounds.width - 5*12) / 4
     }
 }
-
-
